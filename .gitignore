@@ -1,0 +1,13 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+*.swp
+.vscode/
+.idea/
+
+# Original demo images (kept locally as backup, not pushed)
+images/demopic-*.jpg
+images/demopic-*.jpeg
+images/demopic-*.png
