@@ -302,6 +302,82 @@ img { max-width: 100%; display: block; }
   background-image:
     radial-gradient(circle at 80% 20%, rgba(184,150,91,0.06) 0, transparent 45%),
     radial-gradient(circle at 20% 80%, rgba(184,150,91,0.04) 0, transparent 50%);
+  transform-origin: center;
+  animation: heroBreath 9s ease-in-out infinite;
+}
+@keyframes heroBreath {
+  0%, 100% { opacity: 1;    transform: scale(1); }
+  50%      { opacity: 0.78; transform: scale(1.06); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-pattern { animation: none; }
+}
+
+/* =========================================================
+   Hero cinematic entrance — staggered fade-up on page load
+   (overrides the global data-reveal for hero elements only)
+   ========================================================= */
+
+.hero .eyebrow[data-reveal],
+.hero-sub[data-reveal],
+.hero-cta[data-reveal],
+.hero-stats > div[data-reveal] {
+  transition: none;
+  animation: heroFadeUp 1s var(--ease-out) both;
+}
+
+.hero .eyebrow[data-reveal]                  { animation-delay: 0.10s; }
+.hero-sub[data-reveal]                       { animation-delay: 0.85s; }
+.hero-cta[data-reveal]                       { animation-delay: 1.15s; }
+.hero-stats > div:nth-child(1)[data-reveal]  { animation-delay: 1.40s; }
+.hero-stats > div:nth-child(2)[data-reveal]  { animation-delay: 1.55s; }
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .eyebrow[data-reveal],
+  .hero-sub[data-reveal],
+  .hero-cta[data-reveal],
+  .hero-stats > div[data-reveal] {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* =========================================================
+   CTA shine sweep — periodic light pass on hero WhatsApp btn
+   ========================================================= */
+
+.hero-cta .btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 100%
+  );
+  transform: skewX(-22deg);
+  animation: ctaShine 4.5s ease-in-out infinite;
+  animation-delay: 2.4s;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes ctaShine {
+  0%   { left: -80%; }
+  20%  { left: 180%; }
+  100% { left: 180%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta .btn-primary::before { animation: none; opacity: 0; }
 }
 
 
