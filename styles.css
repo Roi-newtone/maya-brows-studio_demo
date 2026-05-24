@@ -266,6 +266,20 @@ img { max-width: 100%; display: block; }
     radial-gradient(circle at 20% 80%, rgba(184,150,91,0.04) 0, transparent 50%);
 }
 
+/* ---------- Hero 3D canvas ---------- */
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  animation: canvasFadeIn 1.6s var(--ease-out) 0.4s forwards;
+  mix-blend-mode: multiply;
+}
+@keyframes canvasFadeIn { to { opacity: 0.82; } }
+@media (max-width: 720px) { #hero-canvas { display: none; } }
+
 .hero-grid {
   position: relative; z-index: 1;
   max-width: var(--max-w);
@@ -713,6 +727,151 @@ section {
   border: 1px solid var(--gold);
   border-radius: var(--radius-lg);
   z-index: 0;
+}
+
+/* ---------- Hotspots ---------- */
+.hotspot {
+  position: absolute;
+  z-index: 4;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.hotspot::after {
+  content: '';
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 0 0 2px var(--gold), 0 2px 8px rgba(31,22,17,0.18);
+  transition: transform .35s var(--ease), background .35s;
+  position: relative;
+  z-index: 2;
+}
+.hotspot:hover::after,
+.hotspot:focus-visible::after {
+  background: var(--gold);
+  transform: scale(1.2);
+}
+.hotspot-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  animation: hotspotRing 2.2s ease-out infinite;
+  pointer-events: none;
+}
+.hotspot-pulse::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  opacity: 0.5;
+  animation: hotspotRing 2.2s ease-out 0.55s infinite;
+}
+@keyframes hotspotRing {
+  0%   { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.hotspot-card {
+  position: absolute;
+  bottom: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: var(--white);
+  padding: 1.1rem 1.25rem 1rem;
+  border-radius: 10px;
+  width: 240px;
+  box-shadow: 0 22px 48px -22px rgba(31, 22, 17, 0.28), 0 0 0 1px var(--line);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  z-index: 5;
+}
+.hotspot-card::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border: 7px solid transparent;
+  border-top-color: var(--white);
+  margin-top: -1px;
+}
+.hotspot:hover .hotspot-card,
+.hotspot:focus-visible .hotspot-card,
+.hotspot.open .hotspot-card {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+.hotspot-eyebrow {
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  font-weight: 500;
+}
+.hotspot-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.hotspot-text {
+  font-size: 0.88rem;
+  color: var(--ink-2);
+  line-height: 1.55;
+  margin-bottom: 0.4rem;
+}
+.hotspot-cta {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.95rem;
+  background: var(--ink);
+  color: var(--white);
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: 999px;
+  transition: background .3s;
+}
+.hotspot-cta:hover { background: var(--gold-deep); }
+
+.hotspot-hint {
+  position: absolute;
+  bottom: 1.2rem;
+  right: 1.2rem;
+  z-index: 3;
+  background: rgba(31, 22, 17, 0.78);
+  backdrop-filter: blur(8px);
+  color: var(--white);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  pointer-events: none;
+  animation: hintBob 3s ease-in-out infinite;
+}
+@keyframes hintBob {
+  0%, 100% { transform: translateY(0); opacity: 0.85; }
+  50%      { transform: translateY(-3px); opacity: 1; }
+}
+@media (max-width: 700px) {
+  .hotspot-card { width: 200px; padding: 0.9rem 1rem; }
 }
 .about-text .section-title { text-align: right; }
 .about-text .eyebrow { padding-bottom: 0; }

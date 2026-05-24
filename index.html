@@ -10,6 +10,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -55,6 +62,7 @@
     <section class="hero">
       <div class="hero-bg" aria-hidden="true">
         <div class="blob blob-1"></div>
+        <canvas id="hero-canvas"></canvas>
         <div class="hero-pattern"></div>
       </div>
 
@@ -267,6 +275,29 @@
         <div class="about-image-frame" data-ph="מאיה בסטודיו">
           <img src="images/maya-about.jpg" alt="מאיה בעבודה בסטודיו" loading="lazy" />
         </div>
+
+        <button class="hotspot" data-area="brows" style="top: 28%; left: 46%" aria-label="עיצוב גבות">
+          <span class="hotspot-pulse" aria-hidden="true"></span>
+          <span class="hotspot-card">
+            <span class="hotspot-eyebrow">עיצוב גבות</span>
+            <span class="hotspot-title">מיקרובליידינג ופאודר ברו</span>
+            <span class="hotspot-text">תכנון אישי, גוון טבעי, תוצאה שנשארת.</span>
+            <a href="#" class="hotspot-cta" data-wa="מיקרובליידינג">לתיאום בוואטסאפ</a>
+          </span>
+        </button>
+
+        <button class="hotspot" data-area="lashes" style="top: 42%; left: 51%" aria-label="ריסים">
+          <span class="hotspot-pulse" aria-hidden="true"></span>
+          <span class="hotspot-card">
+            <span class="hotspot-eyebrow">ריסים</span>
+            <span class="hotspot-title">הרמת ריסים והלחמה</span>
+            <span class="hotspot-text">לאש ליפט, צביעה ואקסטנשנים בהתאמה אישית.</span>
+            <a href="#" class="hotspot-cta" data-wa="הרמת ריסים">לתיאום בוואטסאפ</a>
+          </span>
+        </button>
+
+        <span class="hotspot-hint" aria-hidden="true">לחיצה לפרטים</span>
+
         <div class="about-image-deco" aria-hidden="true"></div>
       </div>
 
@@ -432,5 +463,6 @@
   </a>
 
   <script src="script.js"></script>
+  <script type="module" src="three-scene.js"></script>
 </body>
 </html>

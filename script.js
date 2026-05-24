@@ -16,6 +16,22 @@
     return `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
   };
 
+  /* ----- Hotspots: tap-to-toggle on touch devices ----- */
+  document.querySelectorAll('.hotspot').forEach((h) => {
+    h.addEventListener('click', (e) => {
+      const cta = e.target.closest('.hotspot-cta');
+      if (cta) return; /* let WA handler run */
+      e.preventDefault();
+      document.querySelectorAll('.hotspot.open').forEach((o) => { if (o !== h) o.classList.remove('open'); });
+      h.classList.toggle('open');
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.hotspot')) {
+      document.querySelectorAll('.hotspot.open').forEach((o) => o.classList.remove('open'));
+    }
+  });
+
   /* ----- Hide broken images so the placeholder shows cleanly ----- */
   document.querySelectorAll('img').forEach((img) => {
     const hide = () => { img.style.display = 'none'; };
