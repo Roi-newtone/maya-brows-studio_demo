@@ -10,17 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
-    }
-  }
-  </script>
 </head>
 <body>
-
-  <canvas id="filaments-canvas" aria-hidden="true"></canvas>
 
   <div class="noise" aria-hidden="true"></div>
 
@@ -329,31 +320,15 @@
         <p class="section-lead" data-reveal>כמה תוצאות אחרונות מהסטודיו.</p>
       </div>
 
-      <div class="gallery-grid">
-        <figure class="gallery-item" data-reveal data-size="tall" data-ph="עיצוב גבות">
-          <img src="images/work-1.jpg" alt="עיצוב גבות פרימיום" loading="lazy" />
-          <figcaption>עיצוב גבות</figcaption>
-        </figure>
-        <figure class="gallery-item" data-reveal data-size="wide" data-ph="מיקרובליידינג">
-          <img src="images/work-2.jpg" alt="טיפול מיקרובליידינג" loading="lazy" />
-          <figcaption>מיקרובליידינג בתהליך</figcaption>
-        </figure>
-        <figure class="gallery-item" data-reveal data-ph="עיצוב גבה">
-          <img src="images/work-3.jpg" alt="עיצוב גבה מדויק" loading="lazy" />
-          <figcaption>עיצוב גבה מדויק</figcaption>
-        </figure>
-        <figure class="gallery-item" data-reveal data-ph="פאודר ברו">
-          <img src="images/work-4.jpg" alt="עיצוב גבות לפי מבנה פנים" loading="lazy" />
-          <figcaption>פאודר ברו</figcaption>
-        </figure>
-        <figure class="gallery-item" data-reveal data-size="wide" data-ph="הרמת ריסים">
-          <img src="images/work-5.jpg" alt="הרמת ריסים מקצועית" loading="lazy" />
-          <figcaption>הרמת ריסים וטיפול הזנה</figcaption>
-        </figure>
-        <figure class="gallery-item" data-reveal data-ph="בסטודיו">
-          <img src="images/work-6.jpg" alt="מאיה בעבודה" loading="lazy" />
-          <figcaption>בתוך הסטודיו</figcaption>
-        </figure>
+      <div class="gallery-scene" data-reveal>
+        <div class="gallery-a3d" style="--n: 6">
+          <img class="gallery-card" src="images/work-1.jpg" style="--i: 0" alt="עיצוב גבות פרימיום" />
+          <img class="gallery-card" src="images/work-2.jpg" style="--i: 1" alt="טיפול מיקרובליידינג" />
+          <img class="gallery-card" src="images/work-3.jpg" style="--i: 2" alt="עיצוב גבה מדויק" />
+          <img class="gallery-card" src="images/work-4.jpg" style="--i: 3" alt="פאודר ברו" />
+          <img class="gallery-card" src="images/work-5.jpg" style="--i: 4" alt="הרמת ריסים מקצועית" />
+          <img class="gallery-card" src="images/work-6.jpg" style="--i: 5" alt="מאיה בעבודה" />
+        </div>
       </div>
     </section>
 
@@ -464,6 +439,5 @@
   </a>
 
   <script src="script.js"></script>
-  <script type="module" src="three-scene.js"></script>
 </body>
 </html>

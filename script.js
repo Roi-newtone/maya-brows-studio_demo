@@ -132,7 +132,7 @@
     };
     loop();
 
-    const hoverables = 'a, button, .gallery-item, .menu-row, .testi-grid blockquote, .process-step';
+    const hoverables = 'a, button, .gallery-card, .menu-row, .testi-grid blockquote, .process-step';
     document.querySelectorAll(hoverables).forEach((el) => {
       el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
