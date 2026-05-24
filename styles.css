@@ -1310,6 +1310,185 @@ section {
   transform: translateY(0);
 }
 
+/* =========================================================
+   Scroll-driven reveals for "start of site" cards
+   (Trust strip + Services menu) — CSS view-timeline
+   Falls back to instant final state on unsupported browsers.
+   ========================================================= */
+
+.trust-item,
+.menu-row {
+  view-timeline-axis: block;
+  animation-fill-mode: both;
+  animation-duration: 1ms;
+  animation-timing-function: linear;
+}
+
+/* Trust strip — staggered fade-up with blur clear */
+.trust-item:nth-child(1) {
+  view-timeline-name: --t1;
+  animation-timeline: --t1;
+  animation-name: scrollTrustIn;
+  animation-range: cover 0% cover 30%;
+}
+.trust-item:nth-child(2) {
+  view-timeline-name: --t2;
+  animation-timeline: --t2;
+  animation-name: scrollTrustIn;
+  animation-range: cover 5% cover 35%;
+}
+.trust-item:nth-child(3) {
+  view-timeline-name: --t3;
+  animation-timeline: --t3;
+  animation-name: scrollTrustIn;
+  animation-range: cover 10% cover 40%;
+}
+
+/* Service menu rows — five distinct cinematic reveals */
+.menu-row:nth-child(1) {
+  view-timeline-name: --m1;
+  animation-timeline: --m1;
+  animation-name: scrollSlideRight;
+  animation-range: cover 5% cover 35%;
+}
+.menu-row:nth-child(2) {
+  view-timeline-name: --m2;
+  animation-timeline: --m2;
+  animation-name: scrollClipCircle;
+  animation-range: cover 5% cover 35%;
+}
+.menu-row:nth-child(3) {
+  view-timeline-name: --m3;
+  animation-timeline: --m3;
+  animation-name: scrollSlideLeft;
+  animation-range: cover 5% cover 35%;
+}
+.menu-row:nth-child(4) {
+  view-timeline-name: --m4;
+  animation-timeline: --m4;
+  animation-name: scrollRotateY;
+  animation-range: cover 5% cover 40%;
+  transform-style: preserve-3d;
+}
+.menu-row:nth-child(5) {
+  view-timeline-name: --m5;
+  animation-timeline: --m5;
+  animation-name: scrollClipBottom;
+  animation-range: cover 5% cover 35%;
+}
+
+@keyframes scrollTrustIn {
+  from {
+    opacity: 0;
+    transform: translateY(36px) scale(0.94);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes scrollSlideRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes scrollClipCircle {
+  from {
+    opacity: 0;
+    clip-path: circle(0% at 50% 50%);
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    clip-path: circle(140% at 50% 50%);
+    transform: scale(1);
+  }
+}
+
+@keyframes scrollSlideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes scrollRotateY {
+  from {
+    opacity: 0;
+    transform: perspective(900px) rotateY(-22deg) scale(0.93);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(900px) rotateY(0deg) scale(1);
+  }
+}
+
+@keyframes scrollClipBottom {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Mobile: gentler amplitudes */
+@media (max-width: 700px) {
+  @keyframes scrollSlideRight {
+    from { opacity: 0; transform: translateX(30px); filter: blur(2px); }
+    to   { opacity: 1; transform: translateX(0); filter: blur(0); }
+  }
+  @keyframes scrollSlideLeft {
+    from { opacity: 0; transform: translateX(-30px); filter: blur(2px); }
+    to   { opacity: 1; transform: translateX(0); filter: blur(0); }
+  }
+  @keyframes scrollRotateY {
+    from { opacity: 0; transform: perspective(700px) rotateY(-14deg) scale(0.96); }
+    to   { opacity: 1; transform: perspective(700px) rotateY(0deg) scale(1); }
+  }
+  @keyframes scrollClipBottom {
+    from { opacity: 0; transform: translateY(28px); clip-path: inset(100% 0 0 0); }
+    to   { opacity: 1; transform: translateY(0); clip-path: inset(0 0 0 0); }
+  }
+  @keyframes scrollTrustIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.96); filter: blur(2px); }
+    to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+}
+
+/* Reduced motion: skip scroll-driven reveal entirely */
+@media (prefers-reduced-motion: reduce) {
+  .trust-item,
+  .menu-row {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+  }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
