@@ -266,19 +266,25 @@ img { max-width: 100%; display: block; }
     radial-gradient(circle at 20% 80%, rgba(184,150,91,0.04) 0, transparent 50%);
 }
 
-/* ---------- Hero 3D canvas ---------- */
-#hero-canvas {
-  position: absolute;
+/* ---------- Global rose-gold filament background ---------- */
+html { background: var(--bg); }
+body { background: transparent; }
+
+#filaments-canvas {
+  position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
+  z-index: 0;
   opacity: 0;
-  animation: canvasFadeIn 1.6s var(--ease-out) 0.4s forwards;
-  mix-blend-mode: multiply;
+  animation: filamentsIn 2.4s var(--ease-out) 0.6s forwards;
 }
-@keyframes canvasFadeIn { to { opacity: 0.82; } }
-@media (max-width: 720px) { #hero-canvas { display: none; } }
+@keyframes filamentsIn { to { opacity: 0.85; } }
+@media (max-width: 768px) {
+  #filaments-canvas { animation-duration: 1.6s; }
+  @keyframes filamentsIn { to { opacity: 0.7; } }
+}
 
 .hero-grid {
   position: relative; z-index: 1;
